@@ -6,7 +6,7 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AlphaFlight</title>
-  <link rel="stylesheet" href="src/style.css"> 
+  <link rel="stylesheet" href="src/style.css">
 </head>
 
 <body>
@@ -22,6 +22,18 @@
         Get Data
       </button>
     </div>
+
+    <table id="plane-data-table" class="margin-top-20">
+      <thead>
+        <tr>
+          <th>Callsign</th>
+          <th>Plane</th>
+          <th>Altitude (ft)</th>
+          
+        </tr>
+      </thead>
+      <tbody id="plane-data-table-body"></tbody>
+    </table>
   </div>
   <script type="module" src="/src/main.js"></script>
 </body>

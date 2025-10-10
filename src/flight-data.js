@@ -7,7 +7,8 @@ export async function fetchPlanesInRadius(radius) {
     }
 
     const result = await response.json();
-    logPlanesInRadius(result);
+    // logPlanesInRadius(result);
+    loadTableData("plane-data-table-body", result);
 
   } catch (error) {
     console.error(error.message);
@@ -15,7 +16,20 @@ export async function fetchPlanesInRadius(radius) {
 }
 
 function logPlanesInRadius(planeList) {
-    planeList.ac.forEach(plane => {
-        console.log(`Plane: ${plane.desc}`);
-    });
+  planeList.ac.forEach(plane => {
+    console.log(`Plane: ${plane.desc}`);
+  });
+}
+
+function loadTableData(element, planeList) {
+  const table = document.getElementById(element);
+  planeList.ac.forEach(plane => {
+    let row = table.insertRow();
+    let callsign = row.insertCell(0);
+    callsign.innerHTML = `${plane.flight}`;
+    let type = row.insertCell(1);
+    type.innerHTML = `${plane.desc}`;
+    let altitude = row.insertCell(2);
+    altitude.innerHTML = `${plane.alt_geom.toLocaleString()}`;
+  });
 }
