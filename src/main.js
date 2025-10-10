@@ -1,4 +1,3 @@
-import './style.css'
 import { fetchPlanesInRadius } from './flight-data.js'
 
 const fetchBtn = document.getElementById("fetch-data");
