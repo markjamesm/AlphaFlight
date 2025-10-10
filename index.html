@@ -10,32 +10,35 @@
 </head>
 
 <body>
-  <h1>AlphaFlight</h1>
+  <h1 class="mt-8 mb-4 text-3xl text-center font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span
+      class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-pink-600">AlphaFlight</span></h1>
 
-  <div class="mt-8">
-    <label class="number-field" for="radius">
+  <div class="mt-8 flex flex-row justify-center gap-8">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="radius">
       Radius (km):
-      <input id="radius" class="number-field" type="number" />
+      <input id="radius" class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-gray-700 text-sm font-bold mb-2" type="number" />
     </label>
-    <button id="fetch-data">
-      Get Data
-    </button>
-    <button id="clear-btn">
-      Clear
-    </button>
+    <button type="button" id="fetch-data" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 
+             font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 
+             dark:focus:ring-purple-900">Get Data</button>
+    <button type="button" id="clear-btn" class="focus:outline-none text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:ring-purple-300 
+             font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-pink-600 dark:hover:bg-pink-700 
+             dark:focus:ring-pink-900">Clear</button>
   </div>
 
-  <table id="plane-data-table" class="margin-top-20">
-    <thead>
-      <tr>
-        <th>Callsign</th>
-        <th>Plane</th>
-        <th>Altitude (ft)</th>
-        <th>Speed</th>
-      </tr>
-    </thead>
-    <tbody id="plane-data-table-body"></tbody>
-  </table>
+  <div class="p-8 relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-50 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-100">
+        <tr>
+          <th scope="col" class="px-6 py-3">Callsign</th>
+          <th scope="col" class="px-6 py-3">Plane</th>
+          <th scope="col" class="px-6 py-3">Altitude (ft)</th>
+          <th scope="col" class="px-6 py-3">Speed</th>
+        </tr>
+      </thead>
+      <tbody id="plane-data-table-body"></tbody>
+    </table>
+  </div>
   <script type="module" src="/src/main.js"></script>
 </body>
 
