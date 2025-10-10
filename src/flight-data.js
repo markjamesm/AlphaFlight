@@ -7,11 +7,16 @@ export async function fetchPlanesInRadius(radius) {
     }
 
     const result = await response.json();
-    displayFlightTable("plane-data-table-body", result);
+    renderData("plane-data-table-body", "plane-total", result);
 
   } catch (error) {
     console.error(error.message);
   }
+}
+
+function renderData(tableId, planeTotaId, planeList) {
+  // getElementById(planeTotaId).innerHTML = planeList.ac.length;
+  displayFlightTable(tableId, planeList);
 }
 
 function displayFlightTable(element, planeList) {
@@ -53,7 +58,7 @@ function checkForUndefined(param) {
 
 function parseAltitude(plane) {
   const altNumber = (Number(plane.alt_geom));
-  let output = isNaN(altNumber) ? "Unknown" : altNumber.toLocaleString();
+  let output = isNaN(altNumber) ? "Unknown" : `${altNumber.toLocaleString()} ft`;
 
   return output;
 }
