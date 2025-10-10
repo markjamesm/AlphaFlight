@@ -20,17 +20,17 @@ function displayFlightTable(element, planeList) {
   planeList.ac.forEach(plane => {
     let row = table.insertRow();
     row.className = "bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200";
-    
+
     let callsign = row.insertCell(0);
     callsign.innerHTML = plane.flight;
     callsign.className = "dark:text-white px-6 py-2";
 
     let type = row.insertCell(1);
-    type.innerHTML = plane.desc;
+    type.innerHTML = checkForUndefined(plane.desc);
     type.className = "dark:text-white px-6 py-2"
 
     let altitude = row.insertCell(2);
-    altitude.innerHTML = plane.alt_geom.toLocaleString();
+    altitude.innerHTML = parseAltitude(plane);
     altitude.className = "dark:text-white px-6 py-2"
 
     let groundSpeed = row.insertCell(3);
@@ -43,8 +43,24 @@ export function clearTableData(element) {
   element.innerHTML = '';
 }
 
+function checkForUndefined(param) {
+  if (param === undefined) {
+    return "Unknown";
+  }
+
+  return param;
+}
+
+function parseAltitude(plane) {
+  const altNumber = (Number(plane.alt_geom));
+  let output = isNaN(altNumber) ? "Unknown" : altNumber.toLocaleString();
+
+  return output;
+}
+
 function convertKtsToKmh(speedInKts) {
   const speedInKmh = (Number(speedInKts) * 1.852).toFixed(0);
   let output = isNaN(speedInKmh) ? "Unknown" : speedInKmh;
-  return output; 
+  
+  return output;
 }
