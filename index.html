@@ -16,8 +16,13 @@
   <div class="mt-8 flex flex-row justify-center gap-8">
     <label class="block text-gray-700 text-sm font-bold mb-2" for="radius">
       Radius (km):
-      <input id="radius" class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-gray-700 text-sm font-bold mb-2" type="number" />
+      <input id="radius"
+        class="shadow appearance-none border rounded w-1/4 py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-gray-700 text-sm font-bold mb-2"
+        type="number" />
     </label>
+  </div>
+
+  <div class="mt-8 flex flex-row justify-center gap-8">
     <button type="button" id="fetch-data" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 
              font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 
              dark:focus:ring-purple-900">Get Data</button>
@@ -25,8 +30,9 @@
              font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-pink-600 dark:hover:bg-pink-700 
              dark:focus:ring-pink-900">Clear</button>
   </div>
+
   <div class="mt-8 flex flex-row justify-center gap-8">
-    <p>Total planes: <span id="plane-total"></span></p>
+    <p class="text-xl">Total planes: <span id="plane-total" class="text-purple-800"></span></p>
   </div>
 
   <div class="p-8 relative overflow-x-auto">
@@ -42,6 +48,7 @@
       <tbody id="plane-data-table-body"></tbody>
     </table>
   </div>
+  
   <script type="module" src="/src/main.js"></script>
 </body>
 
