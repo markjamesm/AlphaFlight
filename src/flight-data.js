@@ -15,7 +15,7 @@ export async function fetchPlanesInRadius(radius) {
 }
 
 function renderData(tableId, planeTotaId, planeList) {
-  // getElementById(planeTotaId).innerHTML = planeList.ac.length;
+  document.getElementById(planeTotaId).innerHTML = planeList.ac.length;
   displayFlightTable(tableId, planeList);
 }
 
