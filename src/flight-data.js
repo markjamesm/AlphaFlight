@@ -7,26 +7,23 @@ export async function fetchPlanesInRadius(radius) {
     }
 
     const airplanesLiveData = await response.json();
-    let flightList = [];
 
-    // https://stackoverflow.com/a/50874507
-    for await (const plane of airplanesLiveData.ac) {
-      const callsignInfo = await fetchCallsignInfo(plane.flight);
-      let airlineName = "Unknown";
+    const flightList = await Promise.all(
+      airplanesLiveData.ac.map(async (plane) => {
+        const callsignInfo = await fetchCallsignInfo(plane.flight);
 
-      if (callsignInfo !== undefined && callsignInfo !== null) {
-        airlineName = callsignInfo.response.flightroute.airline.name;
-      }
+        const flightData = new FlightData(
+          plane.flight,
+          callsignInfo.response.flightroute.airline.name,
+          plane.desc ?? "Unknown",
+          parseAltitude(plane.alt_geom),
+          convertKtsToRoundedKmh(plane.gs)
+        );
+        flightList.push(flightData);
 
-      const flightData = new FlightData(
-        plane.flight,
-        airlineName,
-        checkForUndefined(plane.desc),
-        parseAltitude(plane.alt_geom),
-        convertKtsToRoundedKmh(plane.gs)
-      );
-      flightList.push(flightData);
-    }
+        return flightData;
+      })
+    );
 
     renderData("plane-data-table-body", "plane-total", flightList);
   } catch (error) {
@@ -91,19 +88,9 @@ export function clearTableData(element) {
   element.innerHTML = "";
 }
 
-function checkForUndefined(param) {
-  if (param === undefined || param === null) {
-    return "Unknown";
-  }
-
-  return param;
-}
-
 function parseAltitude(altitudeGeom) {
   const altNumber = Number(altitudeGeom);
-  let output = isNaN(altNumber)
-    ? "Unknown"
-    : altNumber.toLocaleString();
+  let output = isNaN(altNumber) ? "Unknown" : altNumber.toLocaleString();
 
   return output;
 }
