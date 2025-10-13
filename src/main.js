@@ -1,7 +1,6 @@
 import { fetchPlanesInRadius } from './flight-data.js'
 import { clearTableData } from './flight-data.js'
 
-
 const fetchBtn = document.getElementById("fetch-data");
 
 fetchBtn.addEventListener("click", () => { 
