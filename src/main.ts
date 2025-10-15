@@ -3,14 +3,14 @@ import { clearTableData } from './display.js'
 
 const fetchBtn = document.getElementById("fetch-data");
 
-fetchBtn.addEventListener("click", () => { 
-  const radius = document.getElementById("radius").value;
-  fetchPlanesInRadius(radius);
+fetchBtn?.addEventListener("click", () => { 
+  const radius = (<HTMLInputElement>document?.getElementById("radius"))?.value ?? 10;
+  fetchPlanesInRadius(Number(radius));
 });
 
 const clearBtn = document.getElementById("clear-btn");
 
-clearBtn.addEventListener("click", () => {
+clearBtn?.addEventListener("click", () => {
   const tableBody = document.getElementById("plane-data-table-body");
   clearTableData(tableBody);
 })

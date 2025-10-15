@@ -1,19 +1,19 @@
-export function renderData(tableBodyId, planeTotalId, flightList) {
-  document.getElementById(planeTotalId).innerHTML = flightList.length;
+export function renderData(tableBodyId: string, planeTotalId : string, flightList: any) {
+  (<HTMLElement>document.getElementById(planeTotalId)).innerHTML = flightList.length;
   displayFlightTable(tableBodyId, flightList);
 }
 
-export function clearTableData(element) {
+export function clearTableData(element: any) {
   element.innerHTML = "";
 }
 
-function displayFlightTable(tableBodyId, flightList) {
+function displayFlightTable(tableBodyId: string, flightList: any) {
   const tableBodyElement = document.getElementById(tableBodyId);
   clearTableData(tableBodyElement);
 
-  flightList.forEach((flight) => {
+  flightList.forEach((flight: any) => {
     console.log(flight);
-    let row = tableBodyElement.insertRow();
+    let row = (<HTMLTableElement>tableBodyElement).insertRow();
     row.className =
       "bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200";
 
@@ -34,7 +34,7 @@ function displayFlightTable(tableBodyId, flightList) {
     altitude.className = "dark:text-white px-6 py-2";
 
     let groundSpeed = row.insertCell(4);
-    groundSpeed.innerHTML = `${flight.speedInKmh} km/h`;
+    groundSpeed.innerHTML = `${flight.speedInKmh.toFixed(0)} km/h`;
     groundSpeed.className = "dark:text-white px-6 py-2";
   });
 }

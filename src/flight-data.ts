@@ -1,13 +1,21 @@
 import { renderData } from "./display.js";
 
-export async function fetchPlanesInRadius(radius) {
+type AirplanesLiveData = {
+  ac: Array<{ flight: string }>;
+}
+
+type FlightDetails = {
+  // props here
+}
+
+export async function fetchPlanesInRadius(radius: number) {
   const airplanesLiveRes = await fetch(
     `https://api.airplanes.live/v2/point/45.50/-73.56/${radius}`
   );
 
   const airplanesLiveJson = await airplanesLiveRes.json();
 
-  const adsbdbRes = airplanesLiveJson.ac.map((d) =>
+  const adsbdbRes = airplanesLiveJson.ac.map((d: AirplanesLiveData) =>
     fetch(`https://api.adsbdb.com/v0/callsign/${d.flight}`).then((r) =>
       r.json()
     )
@@ -15,7 +23,7 @@ export async function fetchPlanesInRadius(radius) {
 
   const adsbdbJson = await Promise.all(adsbdbRes);
 
-  const nearbyFlights = airplanesLiveJson.ac.map((plane) => {
+  const nearbyFlights = airplanesLiveJson.ac.map((plane: any) => {
     const match = adsbdbJson.find(
       (planeAdsbdbApi) =>
         planeAdsbdbApi?.response?.flightroute?.callsign === plane?.flight.trim()
@@ -35,15 +43,15 @@ export async function fetchPlanesInRadius(radius) {
   renderData("plane-data-table-body", "plane-total", nearbyFlights);
 }
 
-function parseAltitude(altitude) {
+function parseAltitude(altitude: string) {
   const altNumber = Number(altitude);
   let output = isNaN(altNumber) ? "Unknown" : altNumber.toLocaleString();
 
   return output;
 }
 
-function convertKtsToRoundedKmh(speedInKts) {
-  const speedInKmh = (Number(speedInKts) * 1.852).toFixed(0);
+function convertKtsToRoundedKmh(speedInKts: string) {
+  const speedInKmh: number = Number(speedInKts) * 1.852;
   let output = isNaN(speedInKmh) ? "Unknown" : speedInKmh;
 
   return output;
