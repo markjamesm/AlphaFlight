@@ -11,6 +11,6 @@ fetchBtn?.addEventListener("click", () => {
 const clearBtn = document.getElementById("clear-btn");
 
 clearBtn?.addEventListener("click", () => {
-  const tableBody = document.getElementById("plane-data-table-body");
+  const tableBody = <HTMLElement>document.getElementById("plane-data-table-body");
   clearTableData(tableBody);
 })

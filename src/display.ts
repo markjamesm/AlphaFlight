@@ -1,14 +1,14 @@
-export function renderData(tableBodyId: string, planeTotalId : string, flightList: any) {
+export function renderData(tableBodyId: string, planeTotalId : string, flightList: any): void {
   (<HTMLElement>document.getElementById(planeTotalId)).innerHTML = flightList.length;
   displayFlightTable(tableBodyId, flightList);
 }
 
-export function clearTableData(element: any) {
+export function clearTableData(element: HTMLElement): void {
   element.innerHTML = "";
 }
 
-function displayFlightTable(tableBodyId: string, flightList: any) {
-  const tableBodyElement = document.getElementById(tableBodyId);
+function displayFlightTable(tableBodyId: string, flightList: any): void {
+  const tableBodyElement = <HTMLElement>document.getElementById(tableBodyId);
   clearTableData(tableBodyElement);
 
   flightList.forEach((flight: any) => {

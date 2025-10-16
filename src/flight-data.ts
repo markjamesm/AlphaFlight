@@ -4,10 +4,6 @@ type AirplanesLiveData = {
   ac: Array<{ flight: string }>;
 }
 
-type FlightDetails = {
-  // props here
-}
-
 export async function fetchPlanesInRadius(radius: number) {
   const airplanesLiveRes = await fetch(
     `https://api.airplanes.live/v2/point/45.50/-73.56/${radius}`
@@ -43,14 +39,14 @@ export async function fetchPlanesInRadius(radius: number) {
   renderData("plane-data-table-body", "plane-total", nearbyFlights);
 }
 
-function parseAltitude(altitude: string) {
+function parseAltitude(altitude: string): string {
   const altNumber = Number(altitude);
   let output = isNaN(altNumber) ? "Unknown" : altNumber.toLocaleString();
 
   return output;
 }
 
-function convertKtsToRoundedKmh(speedInKts: string) {
+function convertKtsToRoundedKmh(speedInKts: string): string | number {
   const speedInKmh: number = Number(speedInKts) * 1.852;
   let output = isNaN(speedInKmh) ? "Unknown" : speedInKmh;
 
